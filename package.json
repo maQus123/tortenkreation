@@ -1,0 +1,16 @@
+{
+  "name": "tortenkreation",
+  "description": "",
+  "repository": {},
+  "license": "",
+  "version": "1.0.0",
+  "main": "generator.js",
+  "scripts": {
+    "generate": "node generator.js"
+  },
+  "dependencies": {
+    "contentful": "^7.15.0",
+    "dotenv": "^8.2.0",
+    "handlebars": "^4.7.6"
+  }
+}
