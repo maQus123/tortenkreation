@@ -6,7 +6,7 @@
   "version": "1.0.0",
   "main": "generator.js",
   "scripts": {
-    "generate": "node generator.js"
+    "build": "node generator.js"
   },
   "dependencies": {
     "contentful": "^7.15.0",
