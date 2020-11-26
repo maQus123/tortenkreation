@@ -13,7 +13,6 @@ async function generate(src, dist) {
     });
     client.getEntries({ content_type: 'cake', order: '-fields.creationDate' }).then(function (result) {
         const html = template(result);
-        if (!Filesystem.existsSync('dist')) { Filesystem.mkdirSync('dist'); }
         Filesystem.writeFile(dist, html, function (err) {
             if (err) return console.log(err);
             console.log('Success');
@@ -28,5 +27,6 @@ async function copy(src, dist) {
     });
 }
 
+if (!Filesystem.existsSync('dist')) { Filesystem.mkdirSync('dist'); }
 generate('./src/torten.html', './dist/torten.html');
 copy('./src/index.html', './dist/index.html');
