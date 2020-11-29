@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tortenkreation - Torten</title>
+    <title>Tortenkreation - {{fields.title}}</title>
 </head>
 
 <nav>
@@ -15,12 +15,7 @@
 </nav>
 
 <body>
-    <h1>Torten</h1>
-    <ul>
-        {{#each items}}
-        <li><a href="torten/{{this.fields.slug}}.html">{{this.fields.title}}</a></li>
-        {{/each}}
-    </ul>
+    <h1>{{fields.title}}</h1>
 </body>
 
 </html>
