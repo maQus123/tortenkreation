@@ -16,6 +16,24 @@
 
 <body>
     <h1>Torten</h1>
+    <table>
+        <th>Bild</th>
+        <th>Title</th>
+        <th>Link</th>
+        {{#each items}}
+        <tr>
+            <td>
+                <img src="img/{{this.fields.slug}}-thumb.jpg">
+            </td>
+            <td>
+                <p>{{this.fields.title}}</p>
+            </td>
+            <td>
+                <p>torten/{{this.fields.slug}}.html</p>
+            </td>
+        </tr>
+        {{/each}}
+    </table>
     <ul>
         {{#each items}}
         <li><a href="torten/{{this.fields.slug}}.html">{{this.fields.title}}</a></li>

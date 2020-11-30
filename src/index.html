@@ -16,7 +16,11 @@
 
 <body>
     <h1>Home</h1>
-    <p>Hallo Welt!</p>
+    <ul>
+        {{#each items}}
+        <li><a href="torten/{{this.fields.slug}}.html">{{this.fields.title}}</a></li>
+        {{/each}}
+    </ul>
 </body>
 
 </html>
