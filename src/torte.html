@@ -16,6 +16,11 @@
 
 <body>
     <h1>{{fields.title}}</h1>
+    <ul>
+        {{#each fields.images}}
+        <li><img src="../img/{{../fields.slug}}-{{@index}}.jpg" /></li>
+        {{/each}}
+    </ul>
 </body>
 
 </html>
