@@ -1,44 +1,44 @@
+<!DOCTYPE html>
 <html lang="de">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tortenkreation - Torten</title>
+    <link rel="stylesheet" href="custom.css">
 </head>
 
 <body>
-    <nav>
-        <h1>Navigation</h1>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="torten.html">Torten</a></li>
-        </ul>
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-primary">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Tortenkreation</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="torten.html">Torten</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </nav>
 
-    <h1>Torten</h1>
-    <table>
-        <th>Bild</th>
-        <th>Title</th>
-        <th>Link</th>
-        {{#each items}}
-        <tr>
-            <td>
-                <img src="img/{{this.fields.slug}}-thumb.jpg">
-            </td>
-            <td>
-                <p>{{this.fields.title}}</p>
-            </td>
-            <td>
-                <p>torten/{{this.fields.slug}}.html</p>
-            </td>
-        </tr>
-        {{/each}}
-    </table>
-    <ul>
-        {{#each items}}
-        <li><a href="torten/{{this.fields.slug}}.html">{{this.fields.title}}</a></li>
-        {{/each}}
-    </ul>
+    <main class="container">
+        <div class="row">
+            {{#each items}}
+            <div class="col-sm">
+                <figure class="figure">
+                    <img src="img/{{this.fields.slug}}-thumb.jpg" class="figure-img img-fluid rounded" alt="{{this.fields.title}}">
+                    <figcaption class="figure-caption">{{this.fields.title}}</figcaption>
+                </figure>
+            </div>
+            {{/each}}
+        </div>
+    </main>
+
 </body>
 
 </html>
