@@ -6,8 +6,8 @@
   "version": "1.0.0",
   "main": "generator.js",
   "scripts": {
-    "build": "npm run generate && npm run compile-sass",
-    "generate": "node generator.js",
+    "build": "npm run generator && npm run compile-sass",
+    "generator": "node src/generator.js",
     "compile-sass": "sass --style compressed --no-source-map --no-error-css src/:dist/"
   },
   "dependencies": {
