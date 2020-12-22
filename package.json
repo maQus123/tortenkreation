@@ -1,17 +1,21 @@
 {
   "name": "tortenkreation",
-  "description": "",
+  "description": "tortenkreation",
   "repository": {},
-  "license": "",
+  "license": "MIT",
   "version": "1.0.0",
   "main": "generator.js",
   "scripts": {
-    "build": "node generator.js"
+    "build": "npm run generate && npm run compile-sass",
+    "generate": "node generator.js",
+    "compile-sass": "sass --style compressed --no-source-map --no-error-css scss/:dist/"
   },
   "dependencies": {
+    "bootstrap": "5.0.0-beta1",
     "contentful": "^7.15.0",
     "dotenv": "^8.2.0",
     "handlebars": "^4.7.6",
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.1",
+    "sass": "^1.30.0"
   }
 }
