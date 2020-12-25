@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tortenkreation - Torten</title>
+    <link rel="stylesheet" href="custom.css">
+</head>
+
+<body>
+
+    {{> nav }}
+
+    <main>
+        <section class="py-5 text-center container">
+            <div class="row py-lg-5">
+                <div class="col-lg-6 col-md-8 mx-auto">
+                    <h1 class="fw-light">Tortenkreationen</h1>
+                    <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
+                </div>
+            </div>
+        </section>
+        <div class="album py-5 bg-light">
+            <div class="container">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                    {{#each items}}
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <img src="img/{{this.fields.slug}}-thumb.jpg" class="card-img-top" alt="{{this.fields.title}}">
+                            <div class="card-body">
+                                <p class="card-text">{{this.fields.title}}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <a class="btn btn-sm btn-outline-secondary" href="torten/{{this.fields.slug}}.html">Details</a>
+                                    <small class="text-muted">{{this.fields.creationDate}}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </main>
+
+    {{> footer }}
+
+</body>
+
+</html>

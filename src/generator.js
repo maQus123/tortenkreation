@@ -6,16 +6,14 @@ const Fetch = require('node-fetch');
 
 const path = {
     dist: './dist',
-    distImg: './dist/img',
-    distTorten: './dist/torten',
-    src: './src'
+    templates: './src/templates'
 };
 
 function initDist() {
     Filesystem.rmdirSync(path.dist, { recursive: true });
     Filesystem.mkdirSync(path.dist);
-    Filesystem.mkdirSync(path.distTorten);
-    Filesystem.mkdirSync(path.distImg);
+    Filesystem.mkdirSync(`${path.dist}/torten`);
+    Filesystem.mkdirSync(`${path.dist}/img`);
 }
 
 function getData() {
@@ -39,11 +37,11 @@ function downloadImages(items) {
     items.forEach(item => {
         downloadImage(
             `https:${item.fields.images[0].fields.file.url}?fm=jpg&q=75&fit=thumb&w=500&h=375`,
-            `${path.distImg}/${item.fields.slug}-thumb.jpg`);
+            `${path.dist}/img/${item.fields.slug}-thumb.jpg`);
         item.fields.images.forEach((image, i) => {
             downloadImage(
                 `https:${image.fields.file.url}?fm=jpg&q=90&w=1500&h=1125`,
-                `${path.distImg}/${item.fields.slug}-${i}.jpg`);
+                `${path.dist}/img/${item.fields.slug}-${i}.jpg`);
         });
     });
 }
@@ -67,12 +65,14 @@ function generateHtml(sourcePath, destinationPath, data) {
 (function () {
     initDist();
     Dotenv.config();
+    Handlebars.registerPartial('nav', Filesystem.readFileSync(`${path.templates}/_nav.html`, 'utf8').toString());
+    Handlebars.registerPartial('footer', Filesystem.readFileSync(`${path.templates}/_footer.html`, 'utf8').toString());
     getData().then(data => {
         downloadImages(data.items);
-        generateHtml(`${path.src}/torten.html`, `${path.dist}/torten.html`, data);
-        generateHtml(`${path.src}/index.html`, `${path.dist}/index.html`, data);
+        generateHtml(`${path.templates}/torten.html`, `${path.dist}/torten.html`, data);
+        generateHtml(`${path.templates}/index.html`, `${path.dist}/index.html`, data);
         data.items.forEach(item => {
-            generateHtml(`${path.src}/torte.html`, `${path.distTorten}/${item.fields.slug}.html`, item);
+            generateHtml(`${path.templates}/torte.html`, `${path.dist}/torten/${item.fields.slug}.html`, item);
         });
     });
 })();

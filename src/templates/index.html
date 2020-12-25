@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tortenkreation - Home</title>
+    <link rel="stylesheet" href="custom.css">
+</head>
+
+<body>
+
+    {{> nav }}
+
+    <main class="container">
+        <h1>Home</h1>
+        <ul>
+            {{#each items}}
+            <li><a href="torten/{{this.fields.slug}}.html">{{this.fields.title}}</a></li>
+            {{/each}}
+        </ul>
+    </main>
+
+    {{> footer }}
+
+</body>
+
+</html>
