@@ -6,15 +6,9 @@ const Fetch = require('node-fetch');
 
 const path = {
     dist: './dist',
-    templates: './src/templates'
+    templates: './src/templates',
+    assets: './src/assets'
 };
-
-function initDist() {
-    Filesystem.rmdirSync(path.dist, { recursive: true });
-    Filesystem.mkdirSync(path.dist);
-    Filesystem.mkdirSync(`${path.dist}/torten`);
-    Filesystem.mkdirSync(`${path.dist}/img`);
-}
 
 function getData() {
     return new Promise((resolve, reject) => {
@@ -59,6 +53,22 @@ function generateHtml(sourcePath, destinationPath, data) {
     let html = template(data);
     Filesystem.writeFile(destinationPath, html, function (err) {
         if (err) return console.log(err);
+    });
+}
+
+function initDist() {
+    Filesystem.rmdirSync(path.dist, { recursive: true });
+    Filesystem.mkdirSync(path.dist);
+    Filesystem.mkdirSync(`${path.dist}/torten`);
+    Filesystem.mkdirSync(`${path.dist}/img`);
+    Filesystem.readdir(path.assets, function (err, files) {
+        if (err) return console.log(err);
+        files.forEach(function (file) {
+            console.log(file);
+            Filesystem.copyFile(path.assets + '/' + file, path.dist + '/' + file, function (err) {
+                if (err) return console.log(err);
+            });
+        });
     });
 }
 
