@@ -64,7 +64,6 @@ function initDist() {
     Filesystem.readdir(path.assets, function (err, files) {
         if (err) return console.log(err);
         files.forEach(function (file) {
-            console.log(file);
             Filesystem.copyFile(path.assets + '/' + file, path.dist + '/' + file, function (err) {
                 if (err) return console.log(err);
             });
@@ -75,6 +74,7 @@ function initDist() {
 (function () {
     initDist();
     Dotenv.config();
+    Handlebars.registerPartial('header', Filesystem.readFileSync(`${path.templates}/_header.html`, 'utf8').toString());
     Handlebars.registerPartial('nav', Filesystem.readFileSync(`${path.templates}/_nav.html`, 'utf8').toString());
     Handlebars.registerPartial('footer', Filesystem.readFileSync(`${path.templates}/_footer.html`, 'utf8').toString());
     getData().then(data => {
