@@ -7,7 +7,7 @@ const Fetch = require('node-fetch');
 const path = {
     dist: './dist',
     templates: './src/templates',
-    assets: './src/assets'
+    assets: './assets'
 };
 
 function getData() {
