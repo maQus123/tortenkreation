@@ -4,13 +4,19 @@ const Contentful = require("contentful");
 const Dotenv = require('dotenv');
 const Fetch = require('node-fetch');
 
-const path = {
+const paths = {
     dist: './dist',
-    templates: './src/templates',
-    assets: './assets'
+    assets: './assets',
+    templates: './src/templates'
 };
 
-function getData() {
+function registerPartials() {
+    Handlebars.registerPartial('header', Filesystem.readFileSync(`${paths.templates}/_header.html`, 'utf8').toString());
+    Handlebars.registerPartial('nav', Filesystem.readFileSync(`${paths.templates}/_nav.html`, 'utf8').toString());
+    Handlebars.registerPartial('footer', Filesystem.readFileSync(`${paths.templates}/_footer.html`, 'utf8').toString());
+}
+
+function fetchJsonData() {
     return new Promise((resolve, reject) => {
         const client = Contentful.createClient({
             space: process.env.CONTENTFUL_SPACE_ID,
@@ -31,11 +37,11 @@ function downloadImages(items) {
     items.forEach(item => {
         downloadImage(
             `https:${item.fields.images[0].fields.file.url}?fm=jpg&q=75&fit=thumb&w=500&h=375`,
-            `${path.dist}/img/${item.fields.slug}-thumb.jpg`);
+            `${paths.dist}/img/${item.fields.slug}-thumb.jpg`);
         item.fields.images.forEach((image, i) => {
             downloadImage(
                 `https:${image.fields.file.url}?fm=jpg&q=90&w=1500&h=1125`,
-                `${path.dist}/img/${item.fields.slug}-${i}.jpg`);
+                `${paths.dist}/img/${item.fields.slug}-${i}.jpg`);
         });
     });
 }
@@ -51,38 +57,39 @@ function generateHtml(sourcePath, destinationPath, data) {
     let source = Filesystem.readFileSync(sourcePath, 'utf8').toString();
     let template = Handlebars.compile(source);
     let html = template(data);
-    Filesystem.writeFile(destinationPath, html, function (err) {
-        if (err) return console.log(err);
-    });
+    Filesystem.writeFile(destinationPath, html, () => { });
 }
 
-function initDist() {
-    Filesystem.rmdirSync(path.dist, { recursive: true });
-    Filesystem.mkdirSync(path.dist);
-    Filesystem.mkdirSync(`${path.dist}/torten`);
-    Filesystem.mkdirSync(`${path.dist}/img`);
-    Filesystem.readdir(path.assets, function (err, files) {
-        if (err) return console.log(err);
+function prepareDistFolder() {
+    Filesystem.rmdirSync(paths.dist, { recursive: true });
+    Filesystem.mkdirSync(paths.dist);
+    Filesystem.mkdirSync(`${paths.dist}/torten`);
+    Filesystem.mkdirSync(`${paths.dist}/img`);
+}
+
+function copyAssets() {
+    Filesystem.readdir(paths.assets, function (err, files) {
         files.forEach(function (file) {
-            Filesystem.copyFile(path.assets + '/' + file, path.dist + '/' + file, function (err) {
-                if (err) return console.log(err);
-            });
+            Filesystem.copyFile(`${paths.assets}/${file}`, `${paths.dist}/${file}`, () => { });
         });
     });
 }
 
-(function () {
-    initDist();
+function init() {
     Dotenv.config();
-    Handlebars.registerPartial('header', Filesystem.readFileSync(`${path.templates}/_header.html`, 'utf8').toString());
-    Handlebars.registerPartial('nav', Filesystem.readFileSync(`${path.templates}/_nav.html`, 'utf8').toString());
-    Handlebars.registerPartial('footer', Filesystem.readFileSync(`${path.templates}/_footer.html`, 'utf8').toString());
-    getData().then(data => {
+    prepareDistFolder();
+    copyAssets();
+}
+
+(function () {
+    init();
+    registerPartials();
+    fetchJsonData().then(data => {
         downloadImages(data.items);
-        generateHtml(`${path.templates}/torten.html`, `${path.dist}/torten.html`, data);
-        generateHtml(`${path.templates}/index.html`, `${path.dist}/index.html`, data);
+        generateHtml(`${paths.templates}/torten.html`, `${paths.dist}/torten.html`, data);
+        generateHtml(`${paths.templates}/index.html`, `${paths.dist}/index.html`, data);
         data.items.forEach(item => {
-            generateHtml(`${path.templates}/torte.html`, `${path.dist}/torten/${item.fields.slug}.html`, item);
+            generateHtml(`${paths.templates}/torte.html`, `${paths.dist}/torten/${item.fields.slug}.html`, item);
         });
     });
 })();
