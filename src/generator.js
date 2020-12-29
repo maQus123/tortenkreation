@@ -14,7 +14,6 @@ function registerPartials() {
     Handlebars.registerPartial('header', Filesystem.readFileSync(`${paths.templates}/_header.html`, 'utf8').toString());
     Handlebars.registerPartial('nav', Filesystem.readFileSync(`${paths.templates}/_nav.html`, 'utf8').toString());
     Handlebars.registerPartial('footer', Filesystem.readFileSync(`${paths.templates}/_footer.html`, 'utf8').toString());
-    Handlebars.registerPartial('parallaxContainer', Filesystem.readFileSync(`${paths.templates}/_parallaxContainer.html`, 'utf8').toString());
 }
 
 function registerHelpers() {

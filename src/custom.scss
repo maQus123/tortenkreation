@@ -1,3 +1,23 @@
+.parallax {
+    height: 350px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.parallax-1 {
+    background-image: url("background-banner-1.jpg");
+}
+
+.parallax-2 {
+    background-image: url("background-banner-2.jpg");
+}
+
+.parallax-3 {
+    background-image: url("background-banner-3.jpg");
+}
+
 $primary: #f48fb1;
 $secondary: #7F3E54;
 $light: #F7DBE4;
