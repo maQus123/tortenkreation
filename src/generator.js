@@ -17,6 +17,16 @@ function registerPartials() {
     Handlebars.registerPartial('parallaxContainer', Filesystem.readFileSync(`${paths.templates}/_parallaxContainer.html`, 'utf8').toString());
 }
 
+function registerHelpers() {
+    Handlebars.registerHelper('date', function (dateString) {
+        var date = new Date(dateString);
+        var day = date.getDate();
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
+        return `${day}.${month}.${year}`;
+    });
+}
+
 function fetchJsonData() {
     return new Promise((resolve, reject) => {
         const client = Contentful.createClient({
@@ -85,6 +95,7 @@ function init() {
 (function () {
     init();
     registerPartials();
+    registerHelpers();
     fetchJsonData().then(data => {
         downloadImages(data.items);
         generateHtml(`${paths.templates}/torten.html`, `${paths.dist}/torten.html`, data);
