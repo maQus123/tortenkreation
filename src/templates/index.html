@@ -8,11 +8,9 @@
     {{> nav home="active" }}
 
     <main>
-        <div class="container-fluid">
-            <div class="row">
-                <img src="background-banner-1.jpg" class="img-fluid px-0">
-            </div>
-        </div>
+
+        {{> parallaxContainer image="background-banner-1.jpg" }}
+
         <div class="container py-5 text-center">
             <div class="row">
                 <h1 class="display-2 text-primary">Tortenkreation SHS</h1>
@@ -31,21 +29,18 @@
                 </div>
             </div>
         </div>
-        <div class="container-fluid">
-            <div class="row">
-                <img src="background-banner-2.jpg" class="img-fluid px-0">
-            </div>
-        </div>
+
+        {{> parallaxContainer image="background-banner-2.jpg" }}
+
         <div class="container py-5 text-center">
             <div class="row">
                 <h1 class="display-2 text-primary">Über mich</h1>
+                <p class="lead text-muted">Hi, ich bin Melissa aus Schloß Holte-Stukenbrock. Herzlich Willkommen auf meinem persönlichen Blog. Backen ist meine große Leidenschaft. Schau doch mal in die <a href="torten.html">Tortengalerie</a>, in der ich dir meine Tortenkreationen präsentiere. Bei Fragen oder Anregungen freue ich mich auf eine Kontaktaufnahme per E-Mail an <a href="mailto:kontakt@tortenkreation-shs.de">kontakt@tortenkreation-shs.de</a>.</p>
             </div>
         </div>
-        <div class="container-fluid">
-            <div class="row">
-                <img src="background-banner-3.jpg" class="img-fluid px-0">
-            </div>
-        </div>
+
+        {{> parallaxContainer image="background-banner-3.jpg" }}
+
     </main>
 
     {{> footer }}
