@@ -24,6 +24,49 @@ function registerHelpers() {
         var year = date.getFullYear();
         return `${day}.${month}.${year}`;
     });
+    Handlebars.registerHelper('description', function (descriptionJson) {
+        var html = '';
+        descriptionJson.content.forEach(paragraph => {
+            html += '<p>';
+            paragraph.content.forEach(node => {
+                if (node.nodeType == 'hyperlink') {
+                    html += '<a href="';
+                    html += node.data.uri;
+                    html += '">';
+                    html += node.content[0].value;
+                    html += '</a>';
+                } else {
+                    if (typeof node.marks !== 'undefined' && node.marks.length > 0) {
+                        node.marks.forEach(mark => {
+                            switch (mark.type) {
+                                case 'italic':
+                                    html += '<i>'; break;
+                                case 'bold':
+                                    html += '<b>'; break;
+                                case 'underline':
+                                    html += '<u>'; break;
+                            }
+                        });
+                        html += node.value;
+                        node.marks.forEach(mark => {
+                            switch (mark.type) {
+                                case 'italic':
+                                    html += '</i>'; break;
+                                case 'bold':
+                                    html += '</b>'; break;
+                                case 'underline':
+                                    html += '</u>'; break;
+                            }
+                        });
+                    } else {
+                        html += node.value;
+                    }
+                }
+            });
+            html += '</p>';
+        });
+        return html;
+    });
 }
 
 function fetchJsonData() {
