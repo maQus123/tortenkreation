@@ -13,12 +13,32 @@
             <div class="row">
                 <h1 class="display-2 fw-light text-muted">{{fields.title}}</h1>
             </div>
-            <div class="row fw-light py-5 lead text-muted">{{{description fields.description}}}</div>
+            <div class="row justify-content-md-center py-5">
+                <div class="col-lg-3"></div>
+                <div class="col fw-light lead text-muted">
+                    {{{description fields.description}}}
+                </div>
+                <div class="col-lg-3"></div>
+            </div>
             <div class="row">
-                <a class="btn btn-primary social-button-pinterest" href="#">pin</a>
-                <a class="btn btn-primary social-button-twitter" href="#">tweet</a>
-                <a class="btn btn-primary social-button-facebook" href="#">share</a>
-                <a class="btn btn-primary social-button-whatsapp" href="#">send</a>
+                <div class="d-grid gap-2 d-md-block">
+                    <a class="btn social-button-pinterest" href="{{pinterestLink fields}}">
+                        <img src="../social-pinterest.png">
+                        <span class="fw-light text-white"> PIN</span>
+                    </a>
+                    <a class="btn social-button-twitter" href="{{twitterLink fields}}">
+                        <img src="../social-twitter.png">
+                        <span class="fw-light text-white"> TWEET</span>
+                    </a>
+                    <a class="btn social-button-facebook" href="{{facebookLink fields}}">
+                        <img src="../social-facebook.png">
+                        <span class="fw-light text-white"> SHARE</span>
+                    </a>
+                    <a class="btn social-button-whatsapp" href="{{whatsappLink fields}}">
+                        <img src="../social-whatsapp.png">
+                        <span class="fw-light text-white"> SEND</span>
+                    </a>
+                </div>
             </div>
             <hr class="my-5" />
             <div class="row">

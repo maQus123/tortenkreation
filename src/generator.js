@@ -4,6 +4,8 @@ const Contentful = require("contentful");
 const Dotenv = require('dotenv');
 const Fetch = require('node-fetch');
 
+const rootUrl = "https://tortenkreation-shs.de";
+
 const paths = {
     dist: './dist',
     assets: './assets',
@@ -38,25 +40,11 @@ function registerHelpers() {
                 } else {
                     if (typeof node.marks !== 'undefined' && node.marks.length > 0) {
                         node.marks.forEach(mark => {
-                            switch (mark.type) {
-                                case 'italic':
-                                    html += '<i>'; break;
-                                case 'bold':
-                                    html += '<b>'; break;
-                                case 'underline':
-                                    html += '<u>'; break;
-                            }
+                            html += getMarkHtml(mark.type);
                         });
                         html += node.value;
                         node.marks.forEach(mark => {
-                            switch (mark.type) {
-                                case 'italic':
-                                    html += '</i>'; break;
-                                case 'bold':
-                                    html += '</b>'; break;
-                                case 'underline':
-                                    html += '</u>'; break;
-                            }
+                            html += getMarkHtml(mark.type, true);
                         });
                     } else {
                         html += node.value;
@@ -67,6 +55,31 @@ function registerHelpers() {
         });
         return html;
     });
+    Handlebars.registerHelper('pinterestLink', function (item) {
+        return `https://pinterest.com/pin/create/button/?url=${rootUrl}/torten/${item.slug}.html&media=${rootUrl}/img/${item.slug}-1.jpg&description=${encodeURI(item.title)}`;
+    });
+    Handlebars.registerHelper('twitterLink', function (item) {
+        return `https://twitter.com/intent/tweet?text=${encodeURI(item.title)}&url=${rootUrl}/torten/${item.slug}.html`;
+    });
+    Handlebars.registerHelper('facebookLink', function (item) {
+        return `https://www.facebook.com/sharer/sharer.php?u=${rootUrl}/torten/${item.slug}.html`;
+    });
+    Handlebars.registerHelper('whatsappLink', function (item) {
+        return `whatsapp://send?text=${encodeURI(item.title)}: ${rootUrl}/torten/${item.slug}.html`;
+    });
+}
+
+function getMarkHtml(markType, isClosingTag) {
+    var markHtml = "<";
+    if (isClosingTag == true) markHtml += "/";
+    switch (markType) {
+        case 'italic':
+            return markHtml += "i>";
+        case 'bold':
+            return markHtml += "b>";
+        case 'underline':
+            return markHtml += "u>";
+    }
 }
 
 function fetchJsonData() {
