@@ -48,7 +48,7 @@
             <div class="row pb-3">
                 {{#each fields.images}}
                 <div class="col-12 col-sm-6 mt-3">
-                    <img class="img-fluid" src="../img/{{../fields.slug}}-{{@index}}.jpg" />
+                    <img class="img-fluid" src="../img/{{../fields.slug}}-{{@index}}.jpg" alt="{{this.fields.title}}" />
                 </div>
                 {{/each}}
             </div>
@@ -57,6 +57,11 @@
     </main>
 
     {{> footer path="../" }}
+
+    <script src="../image-zoom.js"></script>
+    <script>
+        imageZoom();
+    </script>
 
 </body>
 

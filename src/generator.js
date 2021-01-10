@@ -9,7 +9,8 @@ const rootUrl = "https://tortenkreation-shs.de";
 const paths = {
     dist: './dist',
     assets: './assets',
-    templates: './src/templates'
+    templates: './src/templates',
+    imageZoom: './node_modules/image-zoom/dist'
 };
 
 function registerPartials() {
@@ -141,10 +142,15 @@ function copyAssets() {
     });
 }
 
+function copyImageZoomJs() {
+    Filesystem.copyFile(`${paths.imageZoom}/image-zoom.js`, `${paths.dist}/image-zoom.js`, () => { });
+}
+
 function init() {
     Dotenv.config();
     prepareDistFolder();
     copyAssets();
+    copyImageZoomJs();
 }
 
 (function () {
