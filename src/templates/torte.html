@@ -40,6 +40,9 @@
                     </a>
                 </div>
             </div>
+            <div class="row text-center fw-light pt-5">
+                <p>Kreiert am: <b>{{date fields.creationDate}}</b>  |  Anlass: <b>{{fields.occasion}}</b></p>
+            </div>
         </div>
         <div class="container-fluid bg-light">
             <div class="row pb-3">
@@ -48,15 +51,6 @@
                     <img class="img-fluid" src="../img/{{../fields.slug}}-{{@index}}.jpg" />
                 </div>
                 {{/each}}
-            </div>
-        </div>
-        <div class="container py-5 text-center">
-            <div class="row">
-                <ul>
-                    <li>Kreiert am: <b>{{date fields.creationDate}}</b></li>
-                    <li>Anlass: <b>{{fields.occasion}}</b></li>
-                </ul>
-
             </div>
         </div>
 
