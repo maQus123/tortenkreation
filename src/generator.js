@@ -4,8 +4,6 @@ const Contentful = require("contentful");
 const Dotenv = require('dotenv');
 const Fetch = require('node-fetch');
 
-const rootUrl = "https://tortenkreation-shs.de";
-
 const paths = {
     dist: './dist',
     assets: './assets',
@@ -57,16 +55,16 @@ function registerHelpers() {
         return html;
     });
     Handlebars.registerHelper('pinterestLink', function (item) {
-        return `https://pinterest.com/pin/create/button/?url=${rootUrl}/torten/${item.slug}.html&media=${rootUrl}/img/${item.slug}-1.jpg&description=${encodeURI(item.title)}`;
+        return `https://pinterest.com/pin/create/button/?url=${process.env.ROOT_URL}/torten/${item.slug}.html&media=${process.env.ROOT_URL}/img/${item.slug}-1.jpg&description=${encodeURI(item.title)}`;
     });
     Handlebars.registerHelper('twitterLink', function (item) {
-        return `https://twitter.com/intent/tweet?text=${encodeURI(item.title)}&url=${rootUrl}/torten/${item.slug}.html`;
+        return `https://twitter.com/intent/tweet?text=${encodeURI(item.title)}&url=${process.env.ROOT_URL}/torten/${item.slug}.html`;
     });
     Handlebars.registerHelper('facebookLink', function (item) {
-        return `https://www.facebook.com/sharer/sharer.php?u=${rootUrl}/torten/${item.slug}.html`;
+        return `https://www.facebook.com/sharer/sharer.php?u=${process.env.ROOT_URL}/torten/${item.slug}.html`;
     });
     Handlebars.registerHelper('whatsappLink', function (item) {
-        return `whatsapp://send?text=${encodeURI(item.title)}: ${rootUrl}/torten/${item.slug}.html`;
+        return `whatsapp://send?text=${encodeURI(item.title)}: ${process.env.ROOT_URL}/torten/${item.slug}.html`;
     });
 }
 
