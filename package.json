@@ -17,6 +17,7 @@
     "handlebars": "^4.7.6",
     "image-zoom": "github:mvoloskov/image-zoom",
     "node-fetch": "^2.6.1",
-    "sass": "^1.30.0"
+    "sass": "^1.30.0",
+    "@popperjs/core": "^2.5.4"
   }
 }
