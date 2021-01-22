@@ -2,7 +2,7 @@ Tortenkreation website based on [Jamstack-Architecture](https://jamstack.org/) w
 
 Inspired by Smashingmagazine's [Custom Made Static Site Generator](https://www.smashingmagazine.com/2020/09/stack-custom-made-static-site-generator/) article.
 
-## Tech-Stack:
+## Tech-Stack
  - Generator written in pure Javasript with [Node.js](https://nodejs.org/)
  - [Handlebars](https://handlebarsjs.com/) for templating
  - [Bootstrap v5.0.0-beta1](https://getbootstrap.com/) CSS Framework
@@ -10,5 +10,12 @@ Inspired by Smashingmagazine's [Custom Made Static Site Generator](https://www.s
  - Github actions for pipeline
  - [Contentful](https://www.contentful.com/) Headless-CMS for content
 
-
-
+## Getting started
+1. Add `.env` file to project root folder:
+```
+ROOT_URL=*********
+CONTENTFUL_SPACE_ID=*********
+CONTENTFUL_ACCESS_TOKEN=*********
+```
+2. Run `npm install`
+3. Run `npm run build` to run generator
