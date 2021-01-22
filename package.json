@@ -12,12 +12,12 @@
   },
   "dependencies": {
     "bootstrap": "5.0.0-beta1",
-    "contentful": "^7.15.0",
-    "dotenv": "^8.2.0",
-    "handlebars": "^4.7.6",
+    "contentful": "8.1.7",
+    "dotenv": "8.2.0",
+    "handlebars": "4.7.6",
     "image-zoom": "github:mvoloskov/image-zoom",
-    "node-fetch": "^2.6.1",
-    "sass": "^1.30.0",
-    "@popperjs/core": "^2.5.4"
+    "node-fetch": "2.6.1",
+    "sass": "1.32.5",
+    "@popperjs/core": "2.6.0"
   }
 }
