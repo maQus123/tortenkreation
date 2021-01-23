@@ -1,0 +1,13 @@
+{
+    "routes": [{
+        "route": "/torten/",
+        "serve": "/torten.html"
+    }],
+    "platformErrorOverrides": [{
+        "errorType": "NotFound",
+        "serve": "/404.html"
+    }],
+    "defaultHeaders": {
+        "content-security-policy": "default-src 'self'"
+    }
+}
