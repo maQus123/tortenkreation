@@ -29,3 +29,5 @@ jobs:
         env:
           CONTENTFUL_SPACE_ID: ${{ secrets.CONTENTFUL_SPACE_ID }}
           CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
+          CONTACTEMAIL: ${{ secrets.CONTACTEMAIL }}
+          CONTACTNAME: ${{ secrets.CONTACTNAME }}
