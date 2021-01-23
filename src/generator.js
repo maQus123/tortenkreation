@@ -66,6 +66,12 @@ function registerHelpers() {
     Handlebars.registerHelper('whatsappLink', function (item) {
         return `whatsapp://send?text=${encodeURI(item.title)}: ${process.env.ROOT_URL}/torten/${item.slug}.html`;
     });
+    Handlebars.registerHelper('contactEmail', function () {
+        return process.env.CONTACTEMAIL;
+    });
+    Handlebars.registerHelper('contactName', function () {
+        return process.env.CONTACTNAME;
+    });
 }
 
 function getMarkHtml(markType, isClosingTag) {
@@ -155,6 +161,8 @@ function init() {
     init();
     registerPartials();
     registerHelpers();
+    generateHtml(`${paths.templates}/datenschutz.html`, `${paths.dist}/datenschutz.html`);
+    generateHtml(`${paths.templates}/impressum.html`, `${paths.dist}/impressum.html`);
     fetchJsonData().then(data => {
         downloadImages(data.items);
         generateHtml(`${paths.templates}/torten.html`, `${paths.dist}/torten.html`, data);
