@@ -3,6 +3,7 @@ const Handlebars = require('handlebars');
 const Contentful = require("contentful");
 const Dotenv = require('dotenv');
 const Fetch = require('node-fetch');
+const Minify = require('html-minifier').minify;
 
 const paths = {
     dist: './dist',
@@ -128,7 +129,17 @@ function generateHtml(sourcePath, destinationPath, data) {
     let source = Filesystem.readFileSync(sourcePath, 'utf8').toString();
     let template = Handlebars.compile(source);
     let html = template(data);
-    Filesystem.writeFile(destinationPath, html, () => { });
+    let minifiedHtml = Minify(html, {
+        removeAttributeQuotes: true,
+        collapseWhitespace: true,
+        removeComments: true,
+        removeOptionalTags: true,
+        removeRedundantAttributes: true,
+        removeScriptTypeAttributes: true,
+        removeTagWhitespace: true,
+        useShortDoctype: true
+    });
+    Filesystem.writeFile(destinationPath, minifiedHtml, () => { });
 }
 
 function prepareDistFolder() {
