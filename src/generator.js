@@ -154,18 +154,12 @@ function downloadImage(sourceUrl, destinationPath) {
 function generateHtml(sourcePath, destinationPath, data) {
     let source = Filesystem.readFileSync(sourcePath, 'utf8').toString();
     let template = Handlebars.compile(source);
-    let html = template(data);
-    let minifiedHtml = Minify(html, {
-        removeAttributeQuotes: true,
+    let html = Minify(template(data), {
         collapseWhitespace: true,
         removeComments: true,
-        removeOptionalTags: true,
-        removeRedundantAttributes: true,
-        removeScriptTypeAttributes: true,
-        removeTagWhitespace: true,
-        useShortDoctype: true
+        removeTagWhitespace: true
     });
-    Filesystem.writeFile(destinationPath, minifiedHtml, () => { });
+    Filesystem.writeFile(destinationPath, html, () => { });
 }
 
 function prepareDistFolder() {
