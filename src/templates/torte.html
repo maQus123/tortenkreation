@@ -4,9 +4,9 @@
 {{> header 
       title=fields.title 
       path="../" 
-      description="TODO Hier steht die raw description ohne HTML" 
-      pageUrl=(append "torten/" fields.slug ".html") 
-      imageUrl=(append "img/" fields.slug "-thumb.jpg")
+      description=(descriptionRaw fields.description)
+      pageUrl=(concat "torten/" fields.slug ".html")
+      imageUrl=(concat "img/" fields.slug "-thumb.jpg")
 }}
 
 <body>

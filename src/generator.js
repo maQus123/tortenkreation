@@ -55,6 +55,20 @@ function registerHelpers() {
         });
         return html;
     });
+    Handlebars.registerHelper('descriptionRaw', function (descriptionJson) {
+        var text = '';
+        descriptionJson.content.forEach(paragraph => {
+            paragraph.content.forEach(node => {
+                if (node.nodeType == 'hyperlink') {
+                    text += node.content[0].value;
+                } else {
+                    text += node.value;
+                }
+            });
+            text += ' ';
+        });
+        return text;
+    });
     Handlebars.registerHelper('pinterestLink', function (item) {
         return `https://pinterest.com/pin/create/button/?url=${process.env.ROOT_URL}/torten/${item.slug}.html&media=${process.env.ROOT_URL}/img/${item.slug}-1.jpg&description=${encodeURI(item.title)}`;
     });
@@ -75,6 +89,15 @@ function registerHelpers() {
     });
     Handlebars.registerHelper('rootUrl', function () {
         return process.env.ROOT_URL;
+    });
+    Handlebars.registerHelper('concat', function () {
+        var outStr = '';
+        for (var arg in arguments) {
+            if (typeof arguments[arg] != 'object') {
+                outStr += arguments[arg];
+            }
+        }
+        return outStr;
     });
 }
 
