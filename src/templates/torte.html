@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html lang="de">
 
-<header>
-    {{> header title=fields.title path="../" }}
-</header>
+{{> header 
+      title=fields.title 
+      path="../" 
+      description="TODO Hier steht die raw description ohne HTML" 
+      pageUrl=(append "torten/" fields.slug ".html") 
+      imageUrl=(append "img/" fields.slug "-thumb.jpg")
+}}
 
 <body>
 
@@ -18,7 +22,7 @@
             <div class="row justify-content-md-center py-4">
                 <div class="col-lg-3"></div>
                 <div class="col fw-light lead text-muted">
-                    {{{description fields.description}}}
+                    {{{descriptionHtml fields.description}}}
                 </div>
                 <div class="col-lg-3"></div>
             </div>

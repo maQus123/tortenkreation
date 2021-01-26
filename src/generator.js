@@ -26,7 +26,7 @@ function registerHelpers() {
         var year = date.getFullYear();
         return `${day}.${month}.${year}`;
     });
-    Handlebars.registerHelper('description', function (descriptionJson) {
+    Handlebars.registerHelper('descriptionHtml', function (descriptionJson) {
         var html = '';
         descriptionJson.content.forEach(paragraph => {
             html += '<p>';
@@ -72,6 +72,9 @@ function registerHelpers() {
     });
     Handlebars.registerHelper('contactName', function () {
         return process.env.CONTACTNAME;
+    });
+    Handlebars.registerHelper('rootUrl', function () {
+        return process.env.ROOT_URL;
     });
 }
 
