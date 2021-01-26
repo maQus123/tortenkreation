@@ -156,8 +156,7 @@ function generateHtml(sourcePath, destinationPath, data) {
     let template = Handlebars.compile(source);
     let html = Minify(template(data), {
         collapseWhitespace: true,
-        removeComments: true,
-        removeTagWhitespace: true
+        removeComments: true
     });
     Filesystem.writeFile(destinationPath, html, () => { });
 }
