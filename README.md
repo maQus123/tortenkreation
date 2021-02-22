@@ -5,7 +5,7 @@ Inspired by Smashingmagazine's [Custom Made Static Site Generator](https://www.s
 ## Tech-Stack
  - Generator in pure Javascript with [Node.js](https://nodejs.org/)
  - [Handlebars](https://handlebarsjs.com/) templates
- - [Bootstrap v5.0.0-beta1](https://getbootstrap.com/)
+ - [Bootstrap 5](https://getbootstrap.com/)
  - [Azure Static Web Apps](https://azure.microsoft.com/de-de/services/app-service/static/) hosting platform
  - Github actions
  - [Contentful](https://www.contentful.com/) Headless-CMS for content
