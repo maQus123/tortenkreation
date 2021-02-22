@@ -3,10 +3,6 @@
         "route": "/torten/",
         "serve": "/torten.html"
     }],
-    "platformErrorOverrides": [{
-        "errorType": "NotFound",
-        "serve": "/404.html"
-    }],
     "defaultHeaders": {
         "cache-control": "must-revalidate, max-age=120"
     }
