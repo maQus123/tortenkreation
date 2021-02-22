@@ -8,7 +8,7 @@
         "serve": "/404.html"
     }],
     "defaultHeaders": {
-        "content-security-policy": "default-src 'self'",
+        "content-security-policy": "default-src 'self' white-ocean-0bd8a5303.azurestaticapps.net",
         "cache-control": "must-revalidate, max-age=120"
     }
 }
