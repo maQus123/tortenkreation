@@ -195,7 +195,6 @@ function init() {
     registerHelpers();
     generateHtml(`${paths.templates}/datenschutz.html`, `${paths.dist}/datenschutz.html`);
     generateHtml(`${paths.templates}/impressum.html`, `${paths.dist}/impressum.html`);
-    generateHtml(`${paths.templates}/404.html`, `${paths.dist}/404.html`);
     fetchJsonData().then(data => {
         downloadImages(data.items);
         generateHtml(`${paths.templates}/torten.html`, `${paths.dist}/torten.html`, data);
