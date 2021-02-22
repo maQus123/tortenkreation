@@ -28,6 +28,7 @@ function registerHelpers() {
     });
     Handlebars.registerHelper('descriptionHtml', function (descriptionJson) {
         var html = '';
+        if (descriptionJson.content === undefined) return '<p></p>';
         descriptionJson.content.forEach(paragraph => {
             html += '<p>';
             paragraph.content.forEach(node => {
@@ -57,6 +58,7 @@ function registerHelpers() {
     });
     Handlebars.registerHelper('descriptionRaw', function (descriptionJson) {
         var text = '';
+        if (descriptionJson.content === undefined) return text;
         descriptionJson.content.forEach(paragraph => {
             paragraph.content.forEach(node => {
                 if (node.nodeType == 'hyperlink') {
