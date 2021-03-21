@@ -1,9 +1,0 @@
-{
-    "routes": [{
-        "route": "/torten/",
-        "serve": "/torten.html"
-    }],
-    "defaultHeaders": {
-        "cache-control": "must-revalidate, max-age=120"
-    }
-}
