@@ -11,14 +11,14 @@
     "compile-sass": "sass --style compressed --no-source-map --no-error-css src/:dist/"
   },
   "dependencies": {
-    "@popperjs/core": "2.8.3",
-    "bootstrap": "v5.0.0-beta2",
-    "contentful": "8.2.0",
+    "@popperjs/core": "2.9.2",
+    "bootstrap": "v5.0.0-beta3",
+    "contentful": "8.3.1",
     "dotenv": "8.2.0",
     "handlebars": "4.7.7",
     "html-minifier": "4.0.0",
     "image-zoom": "github:mvoloskov/image-zoom",
     "node-fetch": "2.6.1",
-    "sass": "1.32.8"
+    "sass": "1.32.11"
   }
 }
