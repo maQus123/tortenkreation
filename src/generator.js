@@ -207,6 +207,7 @@ function generateRssFeedXml(data) {
             description: getDescriptionRaw(item.fields.description),
             url: `${process.env.ROOT_URL}/torten/${item.fields.slug}.html`,
             date: item.fields.creationDate,
+            image_url: `${process.env.ROOT_URL}/img/${item.fields.slug}-thumb.jpg`,
             custom_elements: [
                 { 'itunes:author': item.fields.title },
                 { 'itunes:subtitle': getDescriptionRaw(item.fields.description) },
