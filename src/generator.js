@@ -4,6 +4,7 @@ const Contentful = require("contentful");
 const Dotenv = require('dotenv');
 const Fetch = require('node-fetch');
 const Minify = require('html-minifier').minify;
+const Rss = require("rss");
 
 const paths = {
     dist: './dist',
@@ -57,19 +58,7 @@ function registerHelpers() {
         return html;
     });
     Handlebars.registerHelper('descriptionRaw', function (descriptionJson) {
-        var text = '';
-        if (descriptionJson.content === undefined) return text;
-        descriptionJson.content.forEach(paragraph => {
-            paragraph.content.forEach(node => {
-                if (node.nodeType == 'hyperlink') {
-                    text += node.content[0].value;
-                } else {
-                    text += node.value;
-                }
-            });
-            text += ' ';
-        });
-        return text;
+        return getDescriptionRaw(descriptionJson);
     });
     Handlebars.registerHelper('pinterestLink', function (item) {
         return `https://pinterest.com/pin/create/button/?url=${process.env.ROOT_URL}/torten/${item.slug}.html&media=${process.env.ROOT_URL}/img/${item.slug}-1.jpg&description=${encodeURI(item.title)}`;
@@ -101,6 +90,22 @@ function registerHelpers() {
         }
         return outStr;
     });
+}
+
+function getDescriptionRaw(descriptionJson) {
+    var text = '';
+    if (descriptionJson.content === undefined) return text;
+    descriptionJson.content.forEach(paragraph => {
+        paragraph.content.forEach(node => {
+            if (node.nodeType == 'hyperlink') {
+                text += node.content[0].value;
+            } else {
+                text += node.value;
+            }
+        });
+        text += ' ';
+    });
+    return text;
 }
 
 function getMarkHtml(markType, isClosingTag) {
@@ -182,6 +187,39 @@ function copyImageZoomJs() {
     Filesystem.copyFile(`${paths.imageZoom}/image-zoom.js`, `${paths.dist}/image-zoom.js`, () => { });
 }
 
+function generateRssFeedXml(data) {
+    const fileName = 'feed.xml';
+    const feed = new Rss({
+        title: 'Tortenkreation SHS',
+        description: 'Dein Blog für individuelle Gestaltung von Motivtorten zu verschiedenen Anlässen aus Schloß Holte-Stukenbrock.',
+        author: process.env.CONTACTNAME,
+        feed_url: `${process.env.ROOT_URL}/${fileName}`,
+        site_url: process.env.ROOT_URL,
+        image_url: `${process.env.ROOT_URL}/ms-icon-310x310.png`
+    });
+    for (const item of data.items) {
+        feed.item({
+            title: item.fields.title,
+            description: getDescriptionRaw(item.fields.description),
+            url: `${process.env.ROOT_URL}/torten/${item.fields.slug}.html`,
+            date: item.fields.creationDate,
+            custom_elements: [
+                { 'itunes:author': item.fields.title },
+                { 'itunes:subtitle': getDescriptionRaw(item.fields.description) },
+                {
+                    'itunes:image': {
+                        _attr: {
+                            href: `${process.env.ROOT_URL}/img/${item.fields.slug}-thumb.jpg`
+                        }
+                    }
+                }
+            ]
+        });
+    }
+    const xml = feed.xml({ indent: true });
+    Filesystem.writeFileSync(`${paths.dist}/${fileName}`, xml, () => { });
+}
+
 function init() {
     Dotenv.config();
     prepareDistFolder();
@@ -202,5 +240,6 @@ function init() {
         data.items.forEach(item => {
             generateHtml(`${paths.templates}/torte.html`, `${paths.dist}/torten/${item.fields.slug}.html`, item);
         });
+        generateRssFeedXml(data);
     });
 })();

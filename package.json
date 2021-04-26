@@ -19,6 +19,7 @@
     "html-minifier": "4.0.0",
     "image-zoom": "github:mvoloskov/image-zoom",
     "node-fetch": "2.6.1",
+    "rss": "1.2.2",
     "sass": "1.32.11"
   }
 }
