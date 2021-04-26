@@ -195,7 +195,11 @@ function generateRssFeedXml(data) {
         author: process.env.CONTACTNAME,
         feed_url: `${process.env.ROOT_URL}/${fileName}`,
         site_url: process.env.ROOT_URL,
-        image_url: `${process.env.ROOT_URL}/ms-icon-310x310.png`
+        image_url: `${process.env.ROOT_URL}/ms-icon-310x310.png`,
+        ttl: '60',
+        custom_namespaces: {
+            'itunes': 'http://www.itunes.com/dtds/podcast-1.0.dtd'
+        }
     });
     for (const item of data.items) {
         feed.item({
