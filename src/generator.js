@@ -29,7 +29,7 @@ function registerHelpers() {
     });
     Handlebars.registerHelper('descriptionHtml', function (descriptionJson) {
         var html = '';
-        if (descriptionJson.content === undefined) return '<p></p>';
+        if (!descriptionJson || descriptionJson.content === undefined) return '<p></p>';
         descriptionJson.content.forEach(paragraph => {
             html += '<p>';
             paragraph.content.forEach(node => {
@@ -94,7 +94,7 @@ function registerHelpers() {
 
 function getDescriptionRaw(descriptionJson) {
     var text = '';
-    if (descriptionJson.content === undefined) return text;
+    if (!descriptionJson || descriptionJson.content === undefined) return text;
     descriptionJson.content.forEach(paragraph => {
         paragraph.content.forEach(node => {
             if (node.nodeType == 'hyperlink') {
