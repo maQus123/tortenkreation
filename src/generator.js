@@ -10,7 +10,7 @@ const paths = {
     dist: './dist',
     assets: './assets',
     templates: './src/templates',
-    imageZoom: './node_modules/image-zoom/dist'
+    imageZoom: './node_modules/fast-image-zoom/dist'
 };
 
 function registerPartials() {
@@ -184,7 +184,7 @@ function copyAssets() {
 }
 
 function copyImageZoomJs() {
-    Filesystem.copyFile(`${paths.imageZoom}/image-zoom.js`, `${paths.dist}/image-zoom.js`, () => { });
+    Filesystem.copyFile(`${paths.imageZoom}/fast-image-zoom.min.js`, `${paths.dist}/image-zoom.js`, () => { });
 }
 
 function generateRssFeedXml(data) {
