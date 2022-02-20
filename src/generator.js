@@ -9,8 +9,7 @@ const Rss = require("rss");
 const paths = {
     dist: './dist',
     assets: './assets',
-    templates: './src/templates',
-    imageZoom: './node_modules/fast-image-zoom/dist'
+    templates: './src/templates'
 };
 
 function registerPartials() {
@@ -183,10 +182,6 @@ function copyAssets() {
     });
 }
 
-function copyImageZoomJs() {
-    Filesystem.copyFile(`${paths.imageZoom}/fast-image-zoom.min.js`, `${paths.dist}/image-zoom.js`, () => { });
-}
-
 function generateRssFeedXml(data) {
     const fileName = 'feed.xml';
     const feed = new Rss({
@@ -229,7 +224,6 @@ function init() {
     Dotenv.config();
     prepareDistFolder();
     copyAssets();
-    copyImageZoomJs();
 }
 
 (function () {
